@@ -11,6 +11,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../core/models/user';
 import { UsersService } from 'src/app/core/services/user.service';
+import { MatiereService } from 'src/app/core/services/matiere.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -51,14 +52,16 @@ percentage: Observable<number>;
     },
   };
   log = '';
+  matieres=[];
   discountRates: number[] = [];
   public products: productModel[] = [];
   public productTemp: productModel[] = [];
   public search: any = '';
   user=JSON.parse(localStorage.getItem('user'));
-  constructor(private storage: AngularFireStorage,private http: HttpClient,private userapi:UsersService,private proapi:StocksService,private route : ActivatedRoute) { }
+  constructor(private matiereService:MatiereService,private storage: AngularFireStorage,private http: HttpClient,private userapi:UsersService,private proapi:StocksService,private route : ActivatedRoute) { }
 
   ngOnInit() {
+    this.getMatiere();
     this.produit=new Produit();
     let us=localStorage.getItem('user');
     let uss=JSON.parse(us);
@@ -97,6 +100,23 @@ this.read();
     //   });
     this.readclients();
 
+  }
+  getMatiere()
+  {
+    this.matiereService.read_Matieres().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id,
+            ...c.payload.doc.data() as {} })
+        )
+      )
+    ).subscribe(data => {
+      this.matieres = data;
+      console.log("matieres",this.matieres);
+
+
+    }
+    );
   }
 detectstock(stk):string
 {

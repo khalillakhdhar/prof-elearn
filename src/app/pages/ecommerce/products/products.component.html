@@ -11,11 +11,16 @@
 <form (ngSubmit)="addproduit()">
 Titre:
 <input type="text" name="titre" class="form-control" placeholder="titre" [(ngModel)]="produit.titre">
+matiere:
+<!-- select with list of matiere-->
+<select name="matiere" class="form-control" [(ngModel)]="produit.matiere">
+  <option *ngFor="let matiere of matieres" [value]="matiere.titre">{{matiere.titre}}</option></select>
 description:
 <textarea name="titre" class="form-control" placeholder="description" [(ngModel)]="produit.description"></textarea>
 Fichier:
 <input (change)="onFileSelected($event)" [(ngModel)]="ph" class="form-control" placeholder="Entrer email" type="file" name="photo"
 />
+
 <div  *ngIf="percentage"  >
  <div
  class="progress-bar progress-bar-info"
@@ -81,6 +86,9 @@ Fichier:
                 <h5 class="mb-3 text-truncate"><!--a [routerLink]="['/ecommerce/product-detail',product.id]" href="javascript: void(0);" class="text-dark"> </a-->
                   {{product.description}}
                 </h5>
+                <h4>
+                matiére:  {{product.matiere}}
+                </h4>
 
 
 

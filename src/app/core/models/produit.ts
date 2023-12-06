@@ -4,6 +4,7 @@ export class Produit {
     titre?:string;
     description?:string;
     photo?:string;
+    matiere?:string;
 
     client?:string;
 }
