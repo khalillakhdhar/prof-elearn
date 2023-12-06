@@ -41,14 +41,14 @@ export class TopbarComponent implements OnInit {
   ];
 
   openMobileMenu: boolean;
-
+user:any;
   @Output() settingsButtonClicked = new EventEmitter();
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
   ngOnInit() {
     this.openMobileMenu = false;
     this.element = document.documentElement;
-
+this.user=JSON.parse(localStorage.getItem('user'));
     this.cookieValue = this._cookiesService.get('lang');
     const val = this.listLang.filter(x => x.lang === this.cookieValue);
     this.countryName = val.map(element => element.text);
