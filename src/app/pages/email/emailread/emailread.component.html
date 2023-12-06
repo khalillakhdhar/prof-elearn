@@ -1,0 +1,95 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="email-leftbar card">
+        <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#composemodal"
+          (click)="open(content)">
+          Envoyer un message
+        </button>
+        <!--div class="mail-list mt-4">
+          <a href="javascript: void(0);" class="active"><i class="mdi mdi-email-outline me-2"></i> Inbox <span
+              class="ms-1 float-end">(18)</span></a>
+          <a href="javascript: void(0);"><i class="mdi mdi-star-outline me-2"></i>Starred</a>
+          <a href="javascript: void(0);"><i class="mdi mdi-diamond-stone me-2"></i>Important</a>
+          <a href="javascript: void(0);"><i class="mdi mdi-file-outline me-2"></i>Draft</a>
+          <a href="javascript: void(0);"><i class="mdi mdi-email-check-outline me-2"></i>Sent Mail</a>
+          <a href="javascript: void(0);"><i class="mdi mdi-trash-can-outline me-2"></i>Trash</a>
+        </div-->
+
+        <h6 class="mt-4">Filtrage</h6>
+
+        <div class="mail-list mt-1">
+          <a href="javascript: void(0);"><span class="mdi mdi-arrow-right-drop-circle text-info float-end"></span>déclaration</a>
+          <a href="javascript: void(0);"><span
+              class="mdi mdi-arrow-right-drop-circle text-warning float-end"></span>Urgent</a>
+          <a href="javascript: void(0);"><span
+              class="mdi mdi-arrow-right-drop-circle text-primary float-end"></span>Paiement</a>
+          <a href="javascript: void(0);"><span
+              class="mdi mdi-arrow-right-drop-circle text-danger float-end"></span>horaires</a>
+          <a href="javascript: void(0);"><span
+              class="mdi mdi-arrow-right-drop-circle text-success float-end"></span>reclamation</a>
+        </div>
+
+
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h5 class="modal-title" id="composemodalTitle">New Message</h5>
+            <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <input type="email" class="form-control" placeholder="To">
+              </div>
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Subject">
+              </div>
+              <div class="mb-3">
+                <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>"></ckeditor>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+            <button type="button" class="btn btn-primary">Send <i class="fab fa-telegram-plane ms-1"></i></button>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- Right Sidebar -->
+      <div class="email-rightbar mb-3">
+
+        <div class="card">
+
+
+          <div class="card-body">
+            <!--div class="media mb-4">
+              <img class="d-flex me-3 rounded-circle avatar-sm" src="assets/images/users/avatar-2.jpg"
+                alt="Generic placeholder image">
+              <div class="media-body">
+                <h5 class="font-size-14 mt-1">Humberto D. Champion</h5>
+                <small class="text-muted">support@domain.com</small>
+              </div>
+            </div-->
+
+            <h4 class="mt-0 font-size-16">{{emailRead.email}}</h4>
+
+            <p>Salut,</p>
+            <p>
+              {{emailRead.titre}}
+            </p>
+            <p>{{emailRead.message}}</p>
+            <p>Merci</p>
+            <hr />
+
+
+
+        </div>
+      </div>
+      <!-- card -->
+    </div>
+  </div>
+</div>

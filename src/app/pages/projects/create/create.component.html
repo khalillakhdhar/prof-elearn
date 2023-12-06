@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+  <!-- end page title -->
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Créer une nouveaux Quizz</h4>
+          <form (submit)="addMatiere()">
+            <div class="row mb-4">
+              <label for="projectname" class="col-form-label col-lg-2">Sujet</label>
+              <div class="col-lg-10">
+                <input id="projectname" [(ngModel)]="matiere.titre"  name="projectname" type="text" name="titre" class="form-control"
+                  placeholder="Entrer le titre de la matiére...">
+              </div>
+            </div>
+            <div class="row mb-4">
+              <label for="projectdesc" class="col-form-label col-lg-2"> Description</label>
+              <div class="col-lg-10">
+                <textarea [(ngModel)]="matiere.description" name="description" class="form-control" id="projectdesc" rows="3"
+                  placeholder="Entrer la Description..."></textarea>
+              </div>
+            </div>
+
+
+
+            <div class="row mb-4">
+              <label for="projectbudget" class="col-form-label col-lg-2">Lien</label>
+              <div class="col-lg-10">
+                <input id="projectbudget" [(ngModel)]="matiere.url" name="projectbudget" type="text" placeholder="niveau..."
+                  class="form-control">
+              </div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-lg-10">
+                <button type="submit" class="btn btn-primary">Ajouter matiére</button>
+              </div>
+              </div>
+          </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+
+ <!-- container-fluid -->

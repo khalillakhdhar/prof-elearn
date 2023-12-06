@@ -1,0 +1,33 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+  <!-- end page title -->
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Create New Task</h4>
+         <form (submit)="evaluate()">
+          Evaluation
+          note:<input name="note" type="text" class="form-control" [(ngModel)]="evaluation.note">
+          <br>
+          Etudiant:<select name="etudiant" class="form-control" [(ngModel)]="evaluation.etudiant">
+            <option *ngFor="let us of users" [value]="us.email">{{us.nom}} {{us.prenom}}</option>
+            </select>
+          <div class="row justify-content-end">
+            <div class="col-lg-10">
+              <button type="submit" class="btn btn-primary">Evaluer</button>
+            </div>
+          </div>
+         </form>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+
+</div> <!-- container-fluid -->

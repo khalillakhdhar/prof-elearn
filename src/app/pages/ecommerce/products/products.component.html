@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <!-- page title -->
+
+  <div class="row">
+    <div *ngIf="user.grade=='enseignant'"  class="col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Créer un Cours</h4>
+          <div>
+            <h5 class="font-size-14 mb-3">Ajout</h5>
+<form (ngSubmit)="addproduit()">
+Titre:
+<input type="text" name="titre" class="form-control" placeholder="titre" [(ngModel)]="produit.titre">
+description:
+<textarea name="titre" class="form-control" placeholder="description" [(ngModel)]="produit.description"></textarea>
+Fichier:
+<input (change)="onFileSelected($event)" [(ngModel)]="ph" class="form-control" placeholder="Entrer email" type="file" name="photo"
+/>
+<div  *ngIf="percentage"  >
+ <div
+ class="progress-bar progress-bar-info"
+ role="progressbar"
+ attr.aria-valuenow="{{ percentage }}"
+ aria-valuemin="0"
+ aria-valuemax="100"
+ [ngStyle]="{ width: percentage + '%' }"
+>
+ {{ prcentage }}%
+</div>  </div>
+
+<button type="submit" [disabled]="prcentage<100" class="btn btn-success" id="btn-save-event">
+  Sauvegarder
+</button>&nbsp;&nbsp;
+<button type="reset" class="btn btn-info"> Vider</button>
+</form>
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-9">
+      <div class="row mb-3">
+        <div class="col-xl-4 col-sm-6">
+          <div class="mt-2">
+            <h5>Cours</h5>
+          </div>
+        </div>
+        <div class="col-lg-8 col-sm-6">
+          <input type="text" class="form-control" placeholder="Rechercher" [disabled]="nom!=''" [(ngModel)]="search"  id="listSearch">
+
+
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-xl-4 col-sm-6" *ngFor="let product of produits  |   Search: search ">
+          <div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="product-img position-relative">
+                <div class="avatar-sm product-ribbon">
+                  <span class="avatar-title rounded-circle bg-primary">
+                      {{product.prix}} E
+                  </span>
+                </div>
+
+                <!--a [routerLink]="['/ecommerce/product-detail',product.id]" href="javascript: void(0);"><img height="200" src="{{product.photo}}" alt=""
+                  class="img-fluid mx-auto d-block"></a-->
+                  <a target="blank" href="{{product.photo}}" alt=""
+                  class="img-fluid mx-auto d-block">
+                Télécharger/voir
+                </a>
+              </div>
+              <div class="mt-4 text-center">
+                <h5 class="mb-3 text-truncate"><!--a [routerLink]="['/ecommerce/product-detail',product.id]" href="javascript: void(0);" class="text-dark"> </a-->
+                  {{product.titre}}<br> Enseignant: ({{product.client}})
+                </h5>
+                <h5 class="mb-3 text-truncate"><!--a [routerLink]="['/ecommerce/product-detail',product.id]" href="javascript: void(0);" class="text-dark"> </a-->
+                  {{product.description}}
+                </h5>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end row -->
+      </div>
+
+    </div>
+    <!-- end row -->
+  </div>
