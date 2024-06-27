@@ -1,31 +1,31 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 
-import { NgbNavModule, NgbAccordionModule, NgbTooltipModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NgbAccordionModule, NgbModule, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { SharedModule } from './cyptolanding/shared/shared.module';
 
 import { ExtrapagesModule } from './extrapages/extrapages.module';
 
-import { LayoutsModule } from './layouts/layouts.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initFirebaseBackend } from './authUtils';
 import { CyptolandingComponent } from './cyptolanding/cyptolanding.component';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LayoutsModule } from './layouts/layouts.module';
 
-import { ErrorInterceptor } from './core/helpers/error.interceptor';
-import { JwtInterceptor } from './core/helpers/jwt.interceptor';
-import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { DatePipe } from '@angular/common';
+import { ErrorInterceptor } from './core/helpers/error.interceptor';
+import { FakeBackendInterceptor } from './core/helpers/fake-backend';
+import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { UsersService } from './core/services/user.service';
 import { SearchPipe } from './search.pipe';
 
@@ -50,7 +50,6 @@ export function createTranslateLoader(http: HttpClient): any {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AngularFireModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     TranslateModule.forRoot({
@@ -74,13 +73,10 @@ export function createTranslateLoader(http: HttpClient): any {
   bootstrap: [AppComponent],
   providers: [
     UsersService,
-
     DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    // LoaderService,
-    // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],
 })
 export class AppModule { }

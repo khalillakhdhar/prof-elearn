@@ -1,51 +1,84 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Project } from '../project.model';
-
-import { projectData } from '../projectdata';
 import { MatiereService } from 'src/app/core/services/matiere.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-projectlist',
   templateUrl: './projectlist.component.html',
   styleUrls: ['./projectlist.component.scss']
 })
-
-/**
- * Projects-list component
- */
 export class ProjectlistComponent implements OnInit {
-  matieres:any;
+  quizzes: any[] = [];
+  selectedQuiz: any[] = [];
+  currentQuestionIndex: number = 0;
+  userAnswers: string[] = [];
+  showResults: boolean = false;
+  score: number;
+  retryChapters: Set<string> = new Set();
+  retryQuestions: any[] = [];
+  breadCrumbItems: Array<{}>;
+  img = "../../../../assets/images/companies/img-1.png";
 
- // bread crumb items
- breadCrumbItems: Array<{}>;
-img="../../../../assets/images/companies/img-1.png"
- projectData: Project[];
+  constructor(private matiereService: MatiereService) { }
 
- constructor(private matiereService:MatiereService) { }
- ngOnInit() {
-   this.breadCrumbItems = [{ label: 'Quizz' }, { label: ' List', active: true }];
+  ngOnInit() {
+    this.breadCrumbItems = [{ label: 'Quizz' }, { label: 'List', active: true }];
+  }
 
-   this.projectData = projectData;
-   this.getMatiere();
- }
- getMatiere()
- {
-   this.matiereService.read_Matieres().pipe(
-     map(changes =>
-       changes.map(c =>
-         ({ id: c.payload.doc.id,
-           ...c.payload.doc.data() as {} })
-       )
-     )
-   ).subscribe(data => {
-     this.matieres = data;
-     console.log("matieres",this.matieres);
+  loadQuiz(fileName: string) {
+    this.matiereService.readQuiz(fileName).subscribe(data => {
+      this.quizzes = data;
+      this.startQuiz();
+    });
+  }
 
+  startQuiz() {
+    this.selectedQuiz = this.getRandomQuizzes(this.quizzes, 20); // Get 20 random questions
+    this.currentQuestionIndex = 0;
+    this.userAnswers = [];
+    this.showResults = false;
+    this.retryQuestions = [];
+    this.retryChapters.clear();
+  }
 
-   }
-   );
- }
+  getRandomQuizzes(quizzes: any[], count: number): any[] {
+    const shuffled = quizzes.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
 
+  submitAnswer(answer: string) {
+    this.userAnswers.push(answer);
+    if (this.currentQuestionIndex < this.selectedQuiz.length - 1) {
+      this.currentQuestionIndex++;
+    } else {
+      this.calculateResults();
+    }
+  }
+
+  calculateResults() {
+    this.showResults = true;
+    let correctAnswers = 0;
+    for (let i = 0; i < this.selectedQuiz.length; i++) {
+      if (this.userAnswers[i] === this.selectedQuiz[i].correct_answer) {
+        correctAnswers++;
+      } else {
+        this.retryChapters.add(this.selectedQuiz[i].chapter);
+      }
+    }
+    this.score = (correctAnswers / this.selectedQuiz.length) * 100;
+
+    if (this.score < 100) {
+      this.prepareRetryQuestions();
+    }
+  }
+
+  prepareRetryQuestions() {
+    this.retryQuestions = this.quizzes.filter(quiz => this.retryChapters.has(quiz.chapter));
+  }
+
+  retryQuiz() {
+    this.selectedQuiz = this.getRandomQuizzes(this.retryQuestions, 20);
+    this.currentQuestionIndex = 0;
+    this.userAnswers = [];
+    this.showResults = false;
+  }
 }
