@@ -24,11 +24,11 @@
   <div *ngIf="showResults">
     <div class="row">
       <div class="col-lg-12">
-        <h4 *ngIf="score === 100">Perfect Score!</h4>
-        <h4 *ngIf="score < 100">Your score: {{score}}%</h4>
+        <h4 *ngIf="score === 100"> Score parfait!</h4>
+        <h4 *ngIf="score < 100">Votre score: {{score}}%</h4>
         <div *ngIf="score < 100">
-          <button (click)="startQuiz()">Retry All</button>
-          <button (click)="retryQuiz()">Retry Incorrect Chapters</button>
+          <button (click)="startQuiz()">Refaire tout</button>
+          <button (click)="retryQuiz()">Refaire les chapitres incorrectes</button>
         </div>
       </div>
     </div>
