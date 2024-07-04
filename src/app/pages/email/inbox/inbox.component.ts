@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Email } from './inbox.model';
-import { emailData } from './data';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
-import { ReclamationsService } from '../../../core/services/reclamation.service';
 import { Reclamation } from '../../../core/models/reclamation';
+import { ReclamationsService } from '../../../core/services/reclamation.service';
+import { emailData } from './data';
+import { Email } from './inbox.model';
 
 @Component({
   selector: 'app-inbox',
@@ -59,6 +59,7 @@ reclamation=new Reclamation();
     let rec=Object.assign({}, this.reclamation);
     this.reclamationService.create_NewReclamation(rec).then(resp=>{
       this.reclamation=new Reclamation();
+      
       Swal.fire({
         position: 'top-end',
         icon: 'success',
