@@ -61,6 +61,9 @@ export class MatiereService {
   read_Matieres() {
     return this.firestore.collection('Quizz').snapshotChanges();
   }
+  read_Matiere() {
+    return this.firestore.collection('/Matieres').snapshotChanges();
+  }
 
   update_Matiere(recordID, record) {
     return this.firestore.doc('Quizz/' + recordID).update(record);

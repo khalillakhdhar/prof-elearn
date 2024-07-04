@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { productModel, productList } from '../product.model';
-import { Options } from 'ng5-slider';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Options } from 'ng5-slider';
+import { Observable } from 'rxjs';
+import { finalize, map } from "rxjs/operators";
 import { Produit } from '../../../core/models/produit';
 import { StocksService } from '../../../core/services/stock.service';
-import { Observable } from 'rxjs';
-import { map, finalize } from "rxjs/operators";
-import { AngularFireStorage } from '@angular/fire/storage';
+import { productList, productModel } from '../product.model';
 
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../../../core/models/user';
-import { UsersService } from 'src/app/core/services/user.service';
 import { MatiereService } from 'src/app/core/services/matiere.service';
+import { UsersService } from 'src/app/core/services/user.service';
+import { User } from '../../../core/models/user';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -103,7 +103,7 @@ this.read();
   }
   getMatiere()
   {
-    this.matiereService.read_Matieres().pipe(
+    this.matiereService.read_Matiere().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id,
@@ -252,4 +252,5 @@ return "disponible"
     }
     );
   }
+
 }

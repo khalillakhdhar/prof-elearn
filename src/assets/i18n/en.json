@@ -166,10 +166,10 @@
       }
     },
     "TASKS": {
-      "TEXT": "Cours",
+      "TEXT": "Meeting",
       "LIST": {
         "TASKLIST": "Task List",
-        "KANBAN": "Cours en ligne",
+        "KANBAN": "Meeting en ligne",
         "CREATETASK": "Evaluer"
       }
     },

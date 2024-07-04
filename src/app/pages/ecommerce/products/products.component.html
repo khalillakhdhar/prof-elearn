@@ -8,15 +8,15 @@
           <h4 class="card-title mb-4">Créer un Cours</h4>
           <div>
             <h5 class="font-size-14 mb-3">Ajout</h5>
-<form (ngSubmit)="addproduit()">
+<form #myForm="ngForm" (ngSubmit)="addproduit()">
 Titre:
 <input type="text" name="titre" class="form-control" placeholder="titre" [(ngModel)]="produit.titre">
 matiere:
 <!-- select with list of matiere-->
-<select name="matiere" class="form-control" [(ngModel)]="produit.matiere">
+<select name="matiere" required class="form-control" [(ngModel)]="produit.matiere">
   <option *ngFor="let matiere of matieres" [value]="matiere.titre">{{matiere.titre}}</option></select>
 description:
-<textarea name="titre" class="form-control" placeholder="description" [(ngModel)]="produit.description"></textarea>
+<textarea required name="titre" class="form-control" placeholder="description" [(ngModel)]="produit.description"></textarea>
 Fichier:
 <input (change)="onFileSelected($event)" [(ngModel)]="ph" class="form-control" placeholder="Entrer email" type="file" name="photo"
 />
@@ -33,7 +33,7 @@ Fichier:
  {{ prcentage }}%
 </div>  </div>
 
-<button type="submit" [disabled]="prcentage<100" class="btn btn-success" id="btn-save-event">
+<button type="submit" [disabled]="prcentage<100 || myForm.invalid" class="btn btn-success" id="btn-save-event">
   Sauvegarder
 </button>&nbsp;&nbsp;
 <button type="reset" class="btn btn-info"> Vider</button>
@@ -67,9 +67,7 @@ Fichier:
             <div class="card-body">
               <div class="product-img position-relative">
                 <div class="avatar-sm product-ribbon">
-                  <span class="avatar-title rounded-circle bg-primary">
-                      {{product.prix}} E
-                  </span>
+                 
                 </div>
 
                 <!--a [routerLink]="['/ecommerce/product-detail',product.id]" href="javascript: void(0);"><img height="200" src="{{product.photo}}" alt=""
