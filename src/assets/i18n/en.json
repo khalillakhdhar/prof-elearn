@@ -176,8 +176,8 @@
     "CONTACTS": {
       "TEXT": "Utilisateurs",
       "LIST": {
-        "USERGRID": "Enseignant",
-        "USERLIST": "Etudiants",
+        "USERGRID": "Recruteur",
+        "USERLIST": "Chercheur",
         "PROFILE": "Profile"
       }
     },
