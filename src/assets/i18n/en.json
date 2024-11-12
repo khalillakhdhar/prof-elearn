@@ -109,9 +109,9 @@
       "BADGE": "New"
     },
     "ECOMMERCE": {
-      "TEXT": "Cours",
+      "TEXT": "Offres",
       "LIST": {
-        "PRODUCTS": "Gestion des cours",
+        "PRODUCTS": "Gestion des Offres",
         "PRODUCTDETAIL": "Product Detail",
         "ORDERS": "Orders",
         "CUSTOMERS": "Customers",
